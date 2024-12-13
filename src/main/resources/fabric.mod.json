@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "survival-stuff",
+  "version": "${version}",
+  "name": "survival-stuff",
+  "description": "",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Minec/survival-stuff"
+  },
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+
+    "main": [
+      "dev.minearchive.survival.Client"
+    ]
+  },
+  "mixins": [
+    "survival-stuff.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
