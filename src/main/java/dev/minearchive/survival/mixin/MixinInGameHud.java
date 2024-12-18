@@ -1,6 +1,7 @@
 package dev.minearchive.survival.mixin;
 
 import dev.minearchive.survival.events.Render2DEvent;
+import dev.minearchive.survival.util.NanoVGUtil;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.hud.InGameHud;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,7 +16,7 @@ public class MixinInGameHud {
 
     @Inject(method = "render", at = @At("HEAD"))
     public void onRender(DrawContext context, float tickDelta, CallbackInfo ci) {
-        EVENT_BUS.post(new Render2DEvent(context, tickDelta));
+        NanoVGUtil.setupAndDraw(false, vg -> EVENT_BUS.post(new Render2DEvent(context, tickDelta)));
     }
 
 }

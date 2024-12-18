@@ -32,7 +32,10 @@ public class ClickGui extends GuiScreen {
     public ClickGui() {
         super("ClickGui");
         EVENT_BUS.register(this);
+        INSTANCE = this;
     }
+
+    public static ClickGui INSTANCE;
 
     private static final MinecraftClient mc = MinecraftClient.getInstance();
     public static final SidePanel sidePanel = new SidePanel();

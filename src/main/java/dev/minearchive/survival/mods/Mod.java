@@ -1,5 +1,6 @@
 package dev.minearchive.survival.mods;
 
+import dev.minearchive.survival.Client;
 import dev.minearchive.survival.events.Render2DEvent;
 import dev.minearchive.survival.mods.setting.Setting;
 import dev.minearchive.survival.util.input.Keybind;
@@ -32,14 +33,14 @@ public class Mod {
 
     public void toggle() {
         enable = !enable;
-        if (enable) EVENT_BUS.register(this);
-        else EVENT_BUS.unregister(this);
+        if (enable) Client.register(this);
+        else Client.unregister(this);
     }
 
     public boolean setToggle(boolean toggle) {
         enable = toggle;
-        if (toggle) EVENT_BUS.register(this);
-        else EVENT_BUS.unregister(this);
+        if (toggle) Client.register(this);
+        else Client.unregister(this);
         return toggle;
     }
 

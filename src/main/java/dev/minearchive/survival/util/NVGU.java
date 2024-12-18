@@ -282,8 +282,12 @@ public class NVGU {
              NVGColor firstColor = NVGColor.calloc();  // allocating memory to pass color to nanovg wrapper
              NVGColor secondColor = NVGColor.calloc()  // allocating memory to pass color to nanovg wrapper
         ){
-            firstColor.r(0).g(0).b(0).a(0.5f);
-            secondColor.r(0).g(0).b(0).a(0);
+            firstColor.r(ColorUtil.getInverseOnSurface().getRed())
+                    .g(ColorUtil.getInverseOnSurface().getGreen())
+                    .b(ColorUtil.getInverseOnSurface().getBlue()).a(0.5f);
+            secondColor.r(ColorUtil.getInverseOnSurface().getRed())
+                    .g(ColorUtil.getInverseOnSurface().getGreen())
+                    .b(ColorUtil.getInverseOnSurface().getBlue()).a(0);
 
             // creating gradient and put it to shadowPaint
             nvgBoxGradient(handle, x - spread, y - spread, w + 2 * spread, h + 2 * spread, cornerRadius + spread, blur, firstColor, secondColor, shadowPaint);

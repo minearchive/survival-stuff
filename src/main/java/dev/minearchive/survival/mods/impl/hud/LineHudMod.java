@@ -1,5 +1,6 @@
 package dev.minearchive.survival.mods.impl.hud;
 
+import dev.minearchive.survival.events.Render2DEvent;
 import dev.minearchive.survival.mods.Hud;
 import dev.minearchive.survival.mods.ModInfo;
 import dev.minearchive.survival.mods.Tag;
@@ -9,7 +10,7 @@ import dev.minearchive.survival.util.NVGU;
 public class LineHudMod extends Hud {
 
     @Override
-    public void onRender(NVGU nvgu) {
+    public void onRender(Render2DEvent event, NVGU nvgu) {
 
     }
 }

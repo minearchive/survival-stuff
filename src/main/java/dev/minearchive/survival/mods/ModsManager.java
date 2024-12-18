@@ -5,6 +5,7 @@ import dev.minearchive.survival.events.KeyboardEvent;
 import dev.minearchive.survival.events.Render2DEvent;
 import dev.minearchive.survival.events.TickEvent;
 import dev.minearchive.survival.gui.clickgui.ClickGui;
+import dev.minearchive.survival.mods.impl.hud.FPS;
 import dev.minearchive.survival.mods.impl.utility.SprintMod;
 import lombok.Getter;
 import org.lwjgl.glfw.GLFW;
@@ -26,82 +27,8 @@ public class ModsManager {
 
     {
         register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
-        register(new SprintMod());
+
+        register(new FPS());
         INSTANCE = this;
     }
 
@@ -130,7 +57,7 @@ public class ModsManager {
 
     @Subscribe
     public void onKey(KeyboardEvent event) {
-        if (event.key() == GLFW.GLFW_KEY_RIGHT_SHIFT && mc.currentScreen == null) mc.setScreen(new ClickGui());
+        if (event.key() == GLFW.GLFW_KEY_RIGHT_SHIFT && mc.currentScreen == null) mc.setScreen(ClickGui.INSTANCE == null ? new ClickGui() : ClickGui.INSTANCE);
         modList.forEach(mod -> {
             if (mod.getKeybind().getKey() == event.key()) mod.toggle();
         });

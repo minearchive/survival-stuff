@@ -1,6 +1,9 @@
 package dev.minearchive.survival.mods;
 
+import com.google.common.eventbus.Subscribe;
+import dev.minearchive.survival.events.Render2DEvent;
 import dev.minearchive.survival.util.NVGU;
+import dev.minearchive.survival.util.NanoVGUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +22,11 @@ public abstract class Hud extends Mod {
         this.draggable = draggable;
     }
 
-    public abstract void onRender(NVGU nvgu);
+    @Subscribe
+    private void onRenderer2d(Render2DEvent event) {
+        this.onRender(event, NanoVGUtil.getNvgu());
+    }
+
+    public abstract void onRender(Render2DEvent event, NVGU nvgu);
 
 }
