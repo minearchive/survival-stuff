@@ -1,9 +1,12 @@
 package dev.minearchive.survival.util.input;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.lwjgl.glfw.GLFW;
 
+@Setter
+@Getter
 public class Keybind {
-
     private int key;
 
     public Keybind() {
@@ -14,11 +17,4 @@ public class Keybind {
         this.key = key;
     }
 
-    public int getKey() {
-        return key;
-    }
-
-    public void setKey(int key) {
-        this.key = key;
-    }
 }

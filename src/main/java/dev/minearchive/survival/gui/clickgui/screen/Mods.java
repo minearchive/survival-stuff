@@ -5,6 +5,7 @@ import dev.minearchive.survival.gui.clickgui.dialog.ModuleDialog;
 import dev.minearchive.survival.gui.clickgui.interfaces.Screen;
 import dev.minearchive.survival.mods.Mod;
 import dev.minearchive.survival.mods.ModsManager;
+import dev.minearchive.survival.mods.Tag;
 import dev.minearchive.survival.util.ColorUtil;
 import dev.minearchive.survival.util.Fonts;
 import dev.minearchive.survival.util.MaterialIcon;
@@ -17,13 +18,15 @@ import dev.minearchive.survival.util.nanovg.Alignment;
 import dev.minearchive.survival.util.nanovg.Border;
 import org.lwjgl.glfw.GLFW;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class Mods implements Screen {
 
-    private List<ModButton> buttons = new ArrayList<>();
+    private final List<ModButton> buttons = new ArrayList<>();
     private final Animation scrollAnim = new Animation(0, EnumEasing.CUBIC.getEasing());
     private double scrollValue = 0;
 
@@ -37,18 +40,30 @@ public class Mods implements Screen {
 
     @Override
     public void render(NVGU vg, int mouseX, int mouseY, float delta) {
-        scrollAnim.animateTo((float) Math.min(scrollValue, 0), 300);
+        scrollAnim.animateTo((float) Math.min(scrollValue, 0), 640);
 
         //search bar
         vg.roundedRectangle(50, 40, width - 100, 50, 25, ColorUtil.getInverseOnSurface());
         vg.roundedRectangleBorder(50, 40, width - 100, 50, 25, 0.5f, ColorUtil.getOutline(), Border.INSIDE);
         Fonts.icon.drawText(MaterialIcon.SEARCH, 75, 65, 28, ColorUtil.getOnSurface(), Alignment.CENTER_MIDDLE);
-        Fonts.REGULAR.drawText("何時か実装されるでしょう。", 95, 65, 24, ColorUtil.getOnSurface(), Alignment.LEFT_MIDDLE);
+        Fonts.REGULAR.drawText("検索機能は何時か実装されます。楽しみにお待ち下さい。", 95, 65, 24, ColorUtil.getOnSurface(), Alignment.LEFT_MIDDLE);
+
+        Arrays.stream(Tag.values()).forEach(tag -> {
+
+        });
+
         vg.scissor(20, 110, width - 40, height - 130, () -> {
             for (ModButton button : buttons) {
                 button.render(vg, mouseX, mouseY, scrollAnim.getValue());
             }
         });
+
+//        int size = (int) (Math.floor(buttons.size() / 2d) + buttons.size() % 2);
+//        float h = size * 80f;
+//        float sliderPosition = height - 130 * (-scrollAnim.getValue() / h - height - 130);
+//        float sliderHeight = height - 130 * (height - 130 / h);
+//
+//        vg.roundedRectangle(1080, sliderPosition, 2, sliderHeight, 1, Color.BLACK);
     }
 
     @Override
@@ -62,11 +77,10 @@ public class Mods implements Screen {
 
     @Override
     public void onScroll(double mouseX, double mouseY, double amount) {
-        this.scrollValue = Math.min(0, Math.max(scrollValue + amount * 50, 780 - 130 - Math.abs(buttons.size() / 2f) * 80));
+        this.scrollValue = Math.min(0, Math.max(scrollValue + amount * 125, 780 - 130 - (Math.floor(buttons.size() / 2d) + buttons.size() % 2) * 80));
     }
 
     public static class ModButton {
-
         private final Animation buttonAnim;
         private final ColorAnimation colorAnimation;
         private final ColorAnimation backgroundAnimation;
@@ -78,9 +92,9 @@ public class Mods implements Screen {
         public ModButton(Mod mod, int i) {
             this.mod = mod;
             this.i = i;
-            this.buttonAnim = new Animation(mod.isEnable() ? 1 : 0, EnumEasing.SINE.getEasing());
-            this.colorAnimation = new ColorAnimation(mod.isEnable() ? ColorUtil.getInversePrimary() : ColorUtil.getSurfaceVariant(), EnumEasing.SINE.getEasing());
-            this.backgroundAnimation = new ColorAnimation(mod.isEnable() ? ColorUtil.getPrimary() : ColorUtil.getOnSecondary(), EnumEasing.SINE.getEasing());
+            this.buttonAnim = new Animation(mod.isEnable() ? 1 : 0, EnumEasing.CUBIC.getEasing());
+            this.colorAnimation = new ColorAnimation(mod.isEnable() ? ColorUtil.getInversePrimary() : ColorUtil.getSurfaceVariant(), EnumEasing.CUBIC.getEasing());
+            this.backgroundAnimation = new ColorAnimation(mod.isEnable() ? ColorUtil.getPrimary() : ColorUtil.getOnSecondary(), EnumEasing.CUBIC.getEasing());
         }
 
         public void render(NVGU vg, int mouseX, int mouseY, float deltaY) {
@@ -93,7 +107,7 @@ public class Mods implements Screen {
 
             //base
             vg.roundedRectangle(x, y + scroll, 520, 70, 5, ColorUtil.getInverseOnSurface());
-            vg.roundedRectangleBorder(x, y + scroll, 520, 70, 5, 0.3f, ColorUtil.getOutline(), Border.INSIDE);
+            vg.roundedRectangleBorder(x, y + scroll, 520, 70, 10, 0.5f, ColorUtil.getOutline(), Border.INSIDE);
 
             //name and description
             Fonts.REGULAR.drawText(mod.getName(), x + 20, y + 10 + scroll, 24, ColorUtil.getOnSurface(), Alignment.LEFT_TOP);
@@ -115,6 +129,19 @@ public class Mods implements Screen {
         }
 
         public void onKey(int keyCode, int scanCode, int modifiers, InputAction action) {
+
+        }
+    }
+
+    public static class TagChip {
+        private final Tag tag;
+        float x, y, w, h;
+
+        public TagChip(Tag tag) {
+            this.tag = tag;
+        }
+
+        public void render(NVGU vg, int mouseX, int mouseY, float deltaX, float deltaY) {
 
         }
     }

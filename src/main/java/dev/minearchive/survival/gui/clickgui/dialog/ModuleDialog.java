@@ -5,11 +5,10 @@ import dev.minearchive.survival.mods.Mod;
 import dev.minearchive.survival.util.NVGU;
 
 public class ModuleDialog extends Dialog {
+    private final Mod mod;
 
-    private final Mod module;
-
-    public ModuleDialog(Mod module) {
-        this.module = module;
+    public ModuleDialog(Mod mod) {
+        this.mod = mod;
     }
 
     @Override

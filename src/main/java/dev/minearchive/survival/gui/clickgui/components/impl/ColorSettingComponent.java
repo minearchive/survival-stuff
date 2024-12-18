@@ -20,7 +20,7 @@ public class ColorSettingComponent extends Component<ColorSetting> implements Ut
 
     public ColorSettingComponent(ColorSetting setting) {
         super(setting);
-        height = new Animation(60, EnumEasing.SINE.getEasing());
+        height = new Animation(60, EnumEasing.CUBIC.getEasing());
     }
 
     @Override

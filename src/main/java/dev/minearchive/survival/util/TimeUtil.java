@@ -1,7 +1,6 @@
 package dev.minearchive.survival.util;
 
 public class TimeUtil {
-
     public static String formatDHMS(long[] dhms) {
         StringBuilder sb = new StringBuilder();
 
@@ -16,14 +15,11 @@ public class TimeUtil {
 
     public static long[] millisecondsToDHMS(long milliseconds) {
         long[] dhms = new long[5];
-
-        // Calculate seconds, minutes, hours, days, and years
-        dhms[0] = (milliseconds / 1000) % 60;  // Seconds
-        dhms[1] = (milliseconds / (1000 * 60)) % 60;  // Minutes
-        dhms[2] = (milliseconds / (1000 * 60 * 60)) % 24;  // Hours
-        dhms[3] = (milliseconds / (1000 * 60 * 60 * 24)) % 365;  // Days
-        dhms[4] = (milliseconds / (1000L * 60 * 60 * 24 * 365));  // Years
-
+        dhms[0] = (milliseconds / 1000) % 60;
+        dhms[1] = (milliseconds / (1000 * 60)) % 60;
+        dhms[2] = (milliseconds / (1000 * 60 * 60)) % 24;
+        dhms[3] = (milliseconds / (1000 * 60 * 60 * 24)) % 365;
+        dhms[4] = (milliseconds / (1000L * 60 * 60 * 24 * 365));
         return dhms;
     }
 

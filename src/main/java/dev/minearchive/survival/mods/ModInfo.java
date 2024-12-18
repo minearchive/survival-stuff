@@ -7,10 +7,9 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_UNKNOWN;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ModInfo {
-
     String name();
     String description();
     boolean enable() default false;
     int keyboard() default GLFW_KEY_UNKNOWN;
-
+    Tag tag();
 }

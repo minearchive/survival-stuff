@@ -3,7 +3,6 @@ package dev.minearchive.survival.util.animation;
 import dev.minearchive.survival.util.easing.Animation;
 import dev.minearchive.survival.util.easing.EnumEasing;
 import dev.minearchive.survival.util.easing.IEasing;
-import net.minecraft.command.argument.ItemStringReader;
 
 import java.awt.*;
 
@@ -12,7 +11,7 @@ public class ColorAnimation {
     private Animation red, green, blue, alpha;
 
     public ColorAnimation() {
-        this(null, EnumEasing.SINE.getEasing());
+        this(null, EnumEasing.CUBIC.getEasing());
     }
 
     public ColorAnimation(Color color, IEasing animation) {
@@ -22,12 +21,11 @@ public class ColorAnimation {
         this.alpha = new Animation((color == null) ? 0.0f : color.getAlpha(), animation);
     }
 
-    public ColorAnimation setAnimation(Color color, float time) {
+    public void setAnimation(Color color, float time) {
         this.red.animateTo(color.getRed(), time);
         this.green.animateTo(color.getGreen(), time);
         this.blue.animateTo(color.getBlue(), time);
         this.alpha.animateTo(color.getAlpha(), time);
-        return this;
     }
 
     public ColorAnimation setValue(Color color) {

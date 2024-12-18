@@ -4,7 +4,6 @@ package dev.minearchive.survival.util;
  * Icon code point from <a href="https://fonts.google.com/icons">here</a>
  */
 public class MaterialIcon {
-
     public static String SEARCH = new String(Character.toChars(0xe8b6));
     public static String HOME = new String(Character.toChars(0xe88a));
     public static String MENU = new String(Character.toChars(0xe5d2));
@@ -20,5 +19,4 @@ public class MaterialIcon {
     public static String AUTO_RENEW = new String(Character.toChars(0xe863));
     public static String READER = new String(Character.toChars(0xe8fe));
     public static String OPEN_IN_BROWSER = new String(Character.toChars(0xe89d));
-
 }

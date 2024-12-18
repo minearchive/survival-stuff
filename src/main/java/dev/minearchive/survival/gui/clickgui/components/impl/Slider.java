@@ -3,7 +3,6 @@ package dev.minearchive.survival.gui.clickgui.components.impl;
 import dev.minearchive.survival.util.NVGU;
 
 public class Slider {
-
     private float value, min, max;
     private final String name;
 

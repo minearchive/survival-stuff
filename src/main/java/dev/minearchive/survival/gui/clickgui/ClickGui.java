@@ -18,6 +18,7 @@ import dev.minearchive.survival.util.nanovg.Alignment;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawContext;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.nanovg.NanoVG;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -38,23 +39,24 @@ public class ClickGui extends GuiScreen {
     public static final MainPanel mainPanel = new MainPanel();
     public static Dialog dialog = null;
     private final List<Panel> panels = List.of(mainPanel, sidePanel);
-    private final Animation scale = new Animation(0.0f, EnumEasing.SINE.getEasing());
-    private final Animation dialogBackground = new Animation(0, EnumEasing.SINE.getEasing());
+    private final Animation scale = new Animation(0.0f, EnumEasing.CUBIC.getEasing());
+    private final Animation dialogBackground = new Animation(0, EnumEasing.CUBIC.getEasing());
     public static boolean isOpen;
 
     @Override
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
-        scale.animateTo(1, 250);
-        dialogBackground.animateTo(dialog == null ? 0 : 100, 150);
+        scale.animateTo(1, 480);
+        dialogBackground.animateTo(dialog == null ? 0 : 100, 480);
         float centerX = mc.getWindow().getWidth() / 2f;
         float centerY = mc.getWindow().getHeight() / 2f;
-        NanoVGUtil.setupAndDraw(false, vg -> {
+        NanoVGUtil.setupAndDraw(false, vg -> vg.scope(() -> {
             vg.scale(centerX, centerY, scale.getValue());
+            NanoVG.nvgGlobalAlpha(vg.getHandle(), scale.getValue());
             vg.roundedRectangle(centerX - 605, centerY - 405, 1210, 810, 15, ColorUtil.getInverseOnSurface());
             panels.forEach(panel -> panel.render(vg, mouseX, mouseY, delta));
             vg.rectangle(0, 0, mc.getWindow().getWidth(), mc.getWindow().getHeight(), ColorUtil.addAlpha(Color.BLACK.getRGB(), dialogBackground.getValue()));
             if (dialog != null) dialog.render(vg, mouseX, mouseY, delta);
-        });
+        }));
     }
 
     @Override
@@ -96,11 +98,10 @@ public class ClickGui extends GuiScreen {
     }
 
     public static class SidePanel implements Panel {
-
         private final MinecraftClient mc = MinecraftClient.getInstance();
         private final List<Button> buttons = new ArrayList<>();
-        private final Animation widthAnimation = new Animation(0.3f, EnumEasing.SINE.getEasing());
-        private final Animation cornerAnimation = new Animation(10, EnumEasing.SINE.getEasing());
+        private final Animation widthAnimation = new Animation(0.3f, EnumEasing.CUBIC.getEasing());
+        private final Animation cornerAnimation = new Animation(10, EnumEasing.CUBIC.getEasing());
 
         public SidePanel() {
             buttons.addAll(
@@ -128,8 +129,8 @@ public class ClickGui extends GuiScreen {
         public void render(NVGU vg, int mouseX, int mouseY, float delta) {
             float centerX = mc.getWindow().getWidth() / 2f;
             float centerY = mc.getWindow().getHeight() / 2f;
-            widthAnimation.animateTo(isOpen ? 1 : 0.325f, 150);
-            cornerAnimation.animateTo(isOpen ? 30 : 15, 150);
+            widthAnimation.animateTo(isOpen ? 1 : 0.325f, 320);
+            cornerAnimation.animateTo(isOpen ? 30 : 15, 320);
             vg.scissor(centerX - 605, centerY - 405, 230 * widthAnimation.getValue(), 810, () -> {
                 vg.roundedRectangle(centerX - 605, centerY - 405, 230 * widthAnimation.getValue(), 810, 15, cornerAnimation.getValue(), cornerAnimation.getValue(), 15, ColorUtil.getBackground());
                 buttons.forEach(button -> button.render(vg, mouseX, mouseY, delta));
@@ -151,7 +152,6 @@ public class ClickGui extends GuiScreen {
         }
 
         public static class Button implements Children {
-
             public final Supplier<String> icon, text;
             public float x, y;
             public final Runnable runnable;
@@ -197,8 +197,7 @@ public class ClickGui extends GuiScreen {
         }
 
         public static class RotateButton extends SidePanel.Button {
-
-            private final Animation rotateAnim = new Animation(0, EnumEasing.SINE.getEasing());
+            private final Animation rotateAnim = new Animation(0, EnumEasing.CUBIC.getEasing());
             private float animateTo = 0;
 
             public RotateButton(Supplier<String> icon, Supplier<String> text, Supplier<Float> x, Supplier<Float> y, Runnable runnable) {
@@ -209,7 +208,7 @@ public class ClickGui extends GuiScreen {
             public void render(NVGU vg, int mouseX, int mouseY, float delta) {
                 if (isOpen) alpha.animateTo(255, 100);
                 else alpha.animateTo(0, 100);
-                rotateAnim.animateTo(animateTo, 250);
+                rotateAnim.animateTo(animateTo, 480);
                 Fonts.REGULAR.drawText(text.get(), x + Fonts.icon.getWidth(icon.get(), 36) + 20, y + Fonts.icon.getHeight(36) / 2f + 2.5f, 24, ColorUtil.addAlpha(ColorUtil.getOnSurface().getRGB(), alpha.getValue()), Alignment.LEFT_MIDDLE);
                 vg.rotateDegrees(x + Fonts.icon.getWidth(icon.get(), 36) / 2 + 4, y + Fonts.icon.getHeight(36) / 2, rotateAnim.getValue(), () ->
                         Fonts.icon.drawText(icon.get(), x + 2, y, 36, ColorUtil.getOnSurface(), Alignment.LEFT_TOP)
@@ -229,18 +228,17 @@ public class ClickGui extends GuiScreen {
     }
 
     public static class MainPanel implements Panel {
-
         private final MinecraftClient mc = MinecraftClient.getInstance();
-        private final Animation overlay = new Animation(1, EnumEasing.SINE.getEasing());
-        private final Animation up = new Animation(0, EnumEasing.SINE.getEasing());
-        private final Animation alpha = new Animation(0, EnumEasing.SINE.getEasing());
+        private final Animation overlay = new Animation(1, EnumEasing.CUBIC.getEasing());
+        private final Animation up = new Animation(0, EnumEasing.CIRC.getEasing());
+        private final Animation alpha = new Animation(0, EnumEasing.CIRC.getEasing());
         public Screen currentScreen = new Home(), oldScreen = null;
 
         @Override
         public void render(NVGU vg, int mouseX, int mouseY, float delta) {
-            up.animateTo(0, 300);
-            alpha.animateTo(255, 200);
-            overlay.animateTo(isOpen ? 100 : 0, 150);
+            up.animateTo(0, 640);
+            alpha.animateTo(255, 320);
+            overlay.animateTo(isOpen ? 100 : 0, 640);
             float centerX = mc.getWindow().getWidth() / 2f;
             float centerY = mc.getWindow().getHeight() / 2f;
             vg.roundedRectangle(centerX - 520, centerY - 390, 1110, 780, 5, ColorUtil.getInverseOnSurface());

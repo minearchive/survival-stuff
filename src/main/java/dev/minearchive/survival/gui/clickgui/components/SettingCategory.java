@@ -1,6 +1,5 @@
 package dev.minearchive.survival.gui.clickgui.components;
 
-import dev.minearchive.survival.gui.clickgui.ClickGui;
 import dev.minearchive.survival.util.ColorUtil;
 import dev.minearchive.survival.util.Fonts;
 import dev.minearchive.survival.util.NVGU;
@@ -9,7 +8,6 @@ import dev.minearchive.survival.util.easing.Animation;
 import dev.minearchive.survival.util.easing.EnumEasing;
 import dev.minearchive.survival.util.input.InputAction;
 import dev.minearchive.survival.util.nanovg.Alignment;
-import dev.minearchive.survival.util.nanovg.Border;
 import lombok.Getter;
 import org.lwjgl.glfw.GLFW;
 
@@ -30,9 +28,8 @@ public class SettingCategory implements Util {
         this.title = title;
     }
 
-    public SettingCategory add(Component<?> component) {
+    public void add(Component<?> component) {
         components.add(component);
-        return this;
     }
 
     public float draw(NVGU vg, float mouseX, float mouseY, float delta) {

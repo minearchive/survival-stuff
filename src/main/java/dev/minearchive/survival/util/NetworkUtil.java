@@ -16,7 +16,7 @@ public class NetworkUtil {
             int responseCode = connection.getResponseCode();
             BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             String inputLine;
-            StringBuffer response = new StringBuffer();
+            StringBuilder response = new StringBuilder();
 
             while ((inputLine = reader.readLine()) != null) {
                 response.append(inputLine);

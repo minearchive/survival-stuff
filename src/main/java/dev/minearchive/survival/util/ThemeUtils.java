@@ -11,13 +11,11 @@ import java.util.List;
 
 @Getter
 public class ThemeUtils {
-
     public static ThemeUtils INSTANCE;
 
     private final List<Theme> themes = new ArrayList<>();
     private Color current = new Color(0x4F378B);
     private Scheme materialScheme = OsThemeDetector.getDetector().isDark() ? Scheme.dark(current.getRGB()) : Scheme.light(current.getRGB());
-    @Setter
     private boolean isDark = OsThemeDetector.getDetector().isDark();
 
     public ThemeUtils() {
@@ -32,10 +30,9 @@ public class ThemeUtils {
         return this;
     }
 
-    public ThemeUtils changeMode(boolean isDark) {
+    public void changeMode(boolean isDark) {
         this.isDark = isDark;
         this.materialScheme = isDark ? Scheme.dark(current.getRGB()) : Scheme.light(current.getRGB());
-        return this;
     }
 }
 

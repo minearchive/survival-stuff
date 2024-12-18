@@ -8,12 +8,10 @@ import lombok.Getter;
 
 @Getter
 public class Component<T extends Setting<?>> implements Util {
-
     private final T setting;
     public float delta;
     public final float x0 = mc.getWindow().getWidth() / 2f - 520;
     public final float y0 = mc.getWindow().getHeight() / 2f - 390;
-
 
     public Component(T setting) {
         this.setting = setting;

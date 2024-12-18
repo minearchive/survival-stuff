@@ -968,14 +968,16 @@ public class NVGU {
      * @param colour the colour to transform into {@link NVGColor}
      */
     public NVGColor createAndStoreColour(Color colour) {
-        return colorResources.computeIfAbsent(colour, (key) -> {
+        if (colorResources.containsKey(colour))
+            return colorResources.get(colour);
+        else {
             try (NVGColor c = NVGColor.calloc()) {
-                return c.r(key.getRed() / 255f)
-                        .g(key.getGreen() / 255f)
-                        .b(key.getBlue() / 255f)
-                        .a(key.getAlpha() / 255f);
+                return c.r(colour.getRed() / 255f)
+                        .g(colour.getGreen() / 255f)
+                        .b(colour.getBlue() / 255f)
+                        .a(colour.getAlpha() / 255f);
             }
-        });
+        }
     }
 
     /**

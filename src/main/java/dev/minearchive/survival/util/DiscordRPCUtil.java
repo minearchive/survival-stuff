@@ -6,15 +6,13 @@ import net.arikia.dev.drpc.DiscordRPC;
 import net.arikia.dev.drpc.DiscordRichPresence;
 
 public class DiscordRPCUtil implements Util{
-
     private static String currentPresents = "";
-    private static final DiscordEventHandlers handlers = new DiscordEventHandlers.Builder()
-            .setReadyEventHandler(user -> {
-                if (mc.player != null && mc.world != null) {
-                    Notification.info("Welcome " + user.username + "!");
-                    Notification.info("You just joined discord RPC!");
-                }
-            }).build();
+    private static final DiscordEventHandlers handlers = new DiscordEventHandlers.Builder().setReadyEventHandler(user -> {
+        if (mc.player != null && mc.world != null) {
+            Notification.info("Welcome " + user.username + "!");
+            Notification.info("You just joined discord RPC!");
+        }
+    }).build();
 
 
     public static void startRPC() {

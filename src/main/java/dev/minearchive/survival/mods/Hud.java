@@ -1,4 +1,4 @@
-package dev.minearchive.survival.mods.impl.hud;
+package dev.minearchive.survival.mods;
 
 import dev.minearchive.survival.util.NVGU;
 import lombok.Getter;
@@ -6,8 +6,7 @@ import lombok.Setter;
 
 @Setter
 @Getter
-public abstract class Hud {
-
+public abstract class Hud extends Mod {
     boolean draggable;
     float x = 0, y = 0, width = 0, height = 0;
     float dragX, dragY;

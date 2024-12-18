@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Setting implements Screen {
-
     private static final List<SettingCategory> settingCategories = new ArrayList<>();
 
     private static final SettingCategory main = addCategory(new SettingCategory("Main"));
@@ -26,7 +25,6 @@ public class Setting implements Screen {
 
     private static final SettingCategory sub = addCategory(new SettingCategory("Sub"));
     private static final BooleanSetting subA = add(true, "sub component test", sub);
-
 
     @Override
     public void render(NVGU vg, int mouseX, int mouseY, float delta) {
