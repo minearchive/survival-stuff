@@ -6,6 +6,7 @@ import dev.minearchive.survival.events.Render2DEvent;
 import dev.minearchive.survival.events.TickEvent;
 import dev.minearchive.survival.gui.clickgui.ClickGui;
 import dev.minearchive.survival.mods.impl.hud.FPS;
+import dev.minearchive.survival.mods.impl.hud.TPS;
 import dev.minearchive.survival.mods.impl.utility.SprintMod;
 import lombok.Getter;
 import org.lwjgl.glfw.GLFW;
@@ -28,7 +29,9 @@ public class ModsManager {
     {
         register(new SprintMod());
 
+        register(new TPS());
         register(new FPS());
+        
         INSTANCE = this;
     }
 

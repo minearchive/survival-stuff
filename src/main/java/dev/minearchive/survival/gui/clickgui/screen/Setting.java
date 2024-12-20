@@ -20,11 +20,8 @@ public class Setting implements Screen {
     private static final List<SettingCategory> settingCategories = new ArrayList<>();
 
     private static final SettingCategory main = addCategory(new SettingCategory("Main"));
-    public static final BooleanSetting testB = add(false, "Test Boolean Setting B", main);
-    public static final ColorSetting colorC = add(ColorUtil.getBackground(), "Bruh", main);
-
-    private static final SettingCategory sub = addCategory(new SettingCategory("Sub"));
-    private static final BooleanSetting subA = add(true, "sub component test", sub);
+    public static final BooleanSetting dark = add(true, "DarkMode", main);
+    public static final BooleanSetting system = add(true, "Auto Sync With System", main);
 
     @Override
     public void render(NVGU vg, int mouseX, int mouseY, float delta) {

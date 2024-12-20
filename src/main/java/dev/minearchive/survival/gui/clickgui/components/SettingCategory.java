@@ -16,7 +16,6 @@ import java.util.List;
 
 @Getter
 public class SettingCategory implements Util {
-
     private final String title;
     private final List<Component<?>> components = new ArrayList<>();
     private Animation openAnim = new Animation(0.0f, EnumEasing.LINEAR.getEasing());
