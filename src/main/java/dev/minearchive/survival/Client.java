@@ -7,6 +7,9 @@ import dev.minearchive.survival.mods.ModsManager;
 import dev.minearchive.survival.util.ThemeUtils;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
+import net.minecraft.client.option.KeyBinding;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -16,20 +19,21 @@ public class Client implements ModInitializer {
     private static final List<Object> registered = new CopyOnWriteArrayList<>();
     public static ModsManager modsManager = new ModsManager();
     public static ThemeUtils themeUtils = new ThemeUtils();
-    public static long startMS = 0;
     public static String VERSION = "v0.0-SNAPSHOT";
+    public static long startMS = 0;
+    public static KeyBinding openGui;
 
     @Override
     public void onInitialize() {
         startMS = System.currentTimeMillis();
         EVENT_BUS.register(modsManager);
-        ClientTickEvents.START_CLIENT_TICK.register((tick) -> {
-            EVENT_BUS.post(new TickEvent());
-        });
+        ClientTickEvents.START_CLIENT_TICK.register((tick) -> EVENT_BUS.post(new TickEvent()));
 
         Runtime.getRuntime().addShutdownHook(new Thread(Config::save));
 
         Config.load();
+
+        openGui = KeyBindingHelper.registerKeyBinding(new KeyBinding("OpenGui", GLFW.GLFW_KEY_UNKNOWN, "Survival stuff"));
     }
 
     private static long modifyLastThreeDigits(long value) {

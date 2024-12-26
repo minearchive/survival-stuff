@@ -19,11 +19,6 @@ public class NanoVGUtil implements Util {
     }
 
     public static void setupAndDraw(boolean mcScale, Consumer<NVGU> nvg) {
-        RenderSystem.enableBlend();
-        RenderSystem.blendFunc(GL_SRC_ALPHA, GL_ONE);
-        RenderSystem.enableDepthTest();
-        RenderSystem.depthFunc(GL_LESS);
-        RenderSystem.clear(GL_DEPTH_BUFFER_BIT, false);
         nvgu.beginFrame(mcScale ? mc.getWindow().getScaledWidth() : mc.getWindow().getWidth(),
                 mcScale ? mc.getWindow().getScaledHeight() : mc.getWindow().getHeight()
         );
@@ -31,10 +26,6 @@ public class NanoVGUtil implements Util {
         nvg.accept(nvgu);
 
         nvgu.endFrame();
-        GlStateManager._disableCull();
-        GlStateManager._disableDepthTest();
-        RenderSystem.enableBlend();
-        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ZERO, GlStateManager.DstFactor.ONE);
     }
 
 }

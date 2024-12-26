@@ -13,8 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static dev.minearchive.survival.Client.EVENT_BUS;
-
 @Getter
 public class Mod {
 

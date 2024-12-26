@@ -1,6 +1,7 @@
 package dev.minearchive.survival.gui.clickgui;
 
 import com.google.common.eventbus.Subscribe;
+import dev.minearchive.survival.Client;
 import dev.minearchive.survival.events.WindowResizeEvent;
 import dev.minearchive.survival.gui.GuiScreen;
 import dev.minearchive.survival.gui.clickgui.interfaces.Children;
@@ -25,13 +26,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
 
-import static dev.minearchive.survival.Client.EVENT_BUS;
 import static dev.minearchive.survival.util.MaterialIcon.*;
 
 public class ClickGui extends GuiScreen {
     public ClickGui() {
         super("ClickGui");
-        EVENT_BUS.register(this);
+        Client.register(this);
         INSTANCE = this;
     }
 
@@ -98,6 +98,11 @@ public class ClickGui extends GuiScreen {
     @Override
     public boolean shouldPause() {
         return false;
+    }
+
+    public ClickGui reset() {
+        scale.setValue(0);
+        return this;
     }
 
     public static class SidePanel implements Panel {

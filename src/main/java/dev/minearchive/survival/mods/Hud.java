@@ -10,12 +10,13 @@ import lombok.Setter;
 @Setter
 @Getter
 public abstract class Hud extends Mod {
-    boolean draggable;
-    float x = 0, y = 0, width = 0, height = 0;
-    float dragX, dragY;
+    private boolean draggable = true;
+    private boolean dragging = false;
+    private float x = 0, y = 0, width = 0, height = 0, round = 0;
+    private float lastX = 0, lastY = 0;
 
     public Hud() {
-        this(false);
+        this(true);
     }
 
     public Hud(boolean draggable) {
@@ -29,4 +30,11 @@ public abstract class Hud extends Mod {
 
     public abstract void onRender(Render2DEvent event, NVGU nvgu);
 
+    public void addX(float x) {
+        this.x += x;
+    }
+
+    public void addY(float y) {
+        this.y += y;
+    }
 }

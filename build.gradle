@@ -27,7 +27,9 @@ dependencies {
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
-    modImplementation "com.github.minechanjp:material-util:v1.1"
+    implementation('com.github.minearchive:material-util:v1.1')
+    implementation('com.github.minearchive:media-api:4459cba33d')
+
     modImplementation 'com.github.Vatuu:discord-rpc:1.6.2'
     modImplementation 'com.github.Dansoftowner:jSystemThemeDetector:3.6'
 

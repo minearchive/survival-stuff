@@ -18,5 +18,8 @@ public class TPS extends Hud {
     public void onRender(Render2DEvent event, NVGU nvgu) {
         nvgu.roundedRectangle(getX(), getY(), 200, 55, 5, new Color(0x5A000000, true));
         Fonts.REGULAR.drawText("TPS: " + TPSCalculator.INSTANCE.getTickRate(), getX() + 15, getY() + 55 / 2f, 22, Color.WHITE, Alignment.LEFT_MIDDLE);
+        setWidth(200);
+        setHeight(55);
+        setRound(5);
     }
 }

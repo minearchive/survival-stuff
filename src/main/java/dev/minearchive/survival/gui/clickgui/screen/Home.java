@@ -1,9 +1,11 @@
 package dev.minearchive.survival.gui.clickgui.screen;
 
+import dev.minearchive.survival.Client;
 import dev.minearchive.survival.gui.clickgui.interfaces.Screen;
 import dev.minearchive.survival.util.ColorUtil;
 import dev.minearchive.survival.util.Fonts;
 import dev.minearchive.survival.util.NVGU;
+import dev.minearchive.survival.util.TimeUtil;
 import dev.minearchive.survival.util.input.InputAction;
 import dev.minearchive.survival.util.nanovg.Alignment;
 import dev.minearchive.survival.util.nanovg.Border;
@@ -26,9 +28,8 @@ public class Home implements Screen {
         //Some info
         vg.roundedRectangleBorder(30, 360, width - 60, 300, 10, 0.5f, ColorUtil.getOutline(), Border.MIDDLE);
         Session session = mc.getSession();
-        Fonts.REGULAR.drawText("Hi " + session.getUsername() + "!", 50, 380, 32, ColorUtil.getOnSurface(), Alignment.LEFT_TOP);
-
-        Fonts.REGULAR.drawText("Todo:Add Something here", width / 2f, 520, 24, ColorUtil.getOnSurface(), Alignment.CENTER_MIDDLE);
+        Fonts.SANS_MEDIUM.drawText("Hi " + session.getUsername() + "!", 50, 380, 32, ColorUtil.getOnSurface(), Alignment.LEFT_TOP);
+        Fonts.REGULAR.drawText("You are playing Minecraft for " + TimeUtil.formatDHMS(TimeUtil.millisecondsToDHMS(System.currentTimeMillis() - Client.startMS)), 50, 420, 24, ColorUtil.getOnSurfaceVariant(), Alignment.LEFT_TOP);
 
         /*
          ここにワンちゃん再生バーいれるのもありかもしれないわかんないけど
